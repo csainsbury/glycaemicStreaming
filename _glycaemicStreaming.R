@@ -72,7 +72,7 @@ findHbA1cValues <- function(dateplustime1, newNumeric, diagnosisDateUnix, timePo
 
 timePoint_1 = 24 # months
 timePoint_2 = 60 # months
-window_1 = 4     # window (half)
+window_1 = 2     # window (half)
 window_2 = 6     # window (half)
 
 T1DM_sub_test_a1c_merge[, c("a1c_point1", "a1c_point2") := findHbA1cValues(dateplustime1, newNumeric, diagnosisDateUnix, timePoint_1, timePoint_2, window_1, window_2) , by=.(LinkId)]
@@ -95,6 +95,10 @@ boxplot(a1c_2point_plot$a1c_point2 ~ cut(a1c_2point_plot$a1c_point1, breaks=seq(
 
 a1c_2point_plot$histDif <- a1c_2point_plot$a1c_point2 / a1c_2point_plot$a1c_point1
 hist(a1c_2point_plot$histDif,breaks=seq(0,6,0.01), xlim=c(0,2))
+
+plot(a1c_2point_plot$a1c_point1, a1c_2point_plot$histDif)
+plot(log(a1c_2point_plot$a1c_point1), a1c_2point_plot$histDif)
+  abline(lm(a1c_2point_plot$histDif ~ log(a1c_2point_plot$a1c_point1)))
 
 
 
