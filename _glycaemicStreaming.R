@@ -91,7 +91,10 @@ a1c_2point_plot <- T1DM_sub_test_a1c_merge_plot[a1c_point1>0 & a1c_point2>0]
 plot(a1c_2point_plot$a1c_point1, a1c_2point_plot$a1c_point2)
   fit <- lm(a1c_2point_plot$a1c_point2 ~ a1c_2point_plot$a1c_point1)
   abline(fit, col="red")
-boxplot(a1c_2point_plot$a1c_point2 ~ cut(a1c_2point_plot$a1c_point1, breaks=seq(0,200,5)), varwidth=T, xlab=paste("a1c at ",timePoint_1," months", sep=""), ylab=paste("a1c at ",timePoint_2," months", sep=""), main=paste("glycemic streaming. T1DM. n=",nrow(a1c_2point_plot), sep=""))
+boxplot(a1c_2point_plot$a1c_point2 ~ cut(a1c_2point_plot$a1c_point1, breaks=seq(0,200,5)), varwidth=T, xlab=paste("a1c at ",timePoint_1," months", sep=""), ylab=paste("a1c at ",timePoint_2," months", sep=""), main=paste("glycemic streaming. T2DM. n=",nrow(a1c_2point_plot), sep=""))
+
+a1c_2point_plot$histDif <- a1c_2point_plot$a1c_point2 / a1c_2point_plot$a1c_point1
+hist(a1c_2point_plot$histDif,breaks=seq(0,6,0.01), xlim=c(0,2))
 
 
 
